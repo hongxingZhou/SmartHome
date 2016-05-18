@@ -1,0 +1,72 @@
+ <!DOCTYPE html>
+<html ng-app="roomModule">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/index.css">
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<script src="js/angular.js"></script>
+</head>
+<body>
+	<div class="cover" ng-show="first">
+		<div class="title">
+			<span>智能家居</span>
+		</div>
+		<div class="pro">
+			<span class="text-infor">加载数据......</span>
+			<div class="progress">
+  				<div class="progress-bar progress-bar-success progress-bar-striped process active " role="progressbar" aria-valuemin="0" aria-valuemax="100">
+  				</div>
+			</div>
+		</div>
+		
+	</div>
+	<div class="box">
+
+			<div class="left-part">
+				<ul class="menu">
+					<li ng-class={'active':num==1}><a ng-click="changeNum(1)" href="#/lamp"><div class="lamp"></div><label>日照灯</label></a></li>
+					<li ng-class={'active':num==2}><a ng-click="changeNum(2)" href="#/water"><div class="drink"></div><label>饮水机</label></a></li>
+					<li ng-class={'active':num==3}><a ng-click="changeNum(3)" href="#/aircondition"><div class="air-condition"></div><label>空调</label></a></li>
+					<li ng-class={'active':num==4}><a ng-click="changeNum(4)" href="#/sensor"><div class="sensor"></div><label>传感器模块</label></a></li>
+					<li ng-class={'active':num==5}><a ng-click="changeNum(5)" href="#/appliance"><div class="jd"></div><label>家电模块</label></a></li>
+					<li ng-class={'active':num==6}><a ng-click="changeNum(6)" href="#/setting"><div class="set"></div><label>系统设置</label></a></li>
+				</ul>
+			</div>
+			<div class="right-part">
+				<div class="container-fluid">
+					<div ng-view></div>
+				</div>
+        	</div>
+	</div>
+	<!-- mask -->
+	<div class="mask" ng-show="mask">
+		<button type="button" class="close" ng-click="mask=false"><span aria-hidden="true">&times;</span></button>
+		<p id="content" class="content text-primary">提示框一</p>
+		<div class="review">
+ 			<input type="checkbox" ng-model="review"><span class="text-primary"> 不再显示</span>
+ 			<button type=button class="btn btn-success pull-right" ng-click="mask=false">确定</button>
+ 		</div>
+	</div>
+	<!-- mask 2-->
+	<div class="mask2" ng-show="mask2">
+		<button type="button" class="close" ng-click="mask2=false"><span aria-hidden="true">&times;</span></button>
+		<p id="content2" class="content text-primary">提示框二</p>
+		<div class="review">
+ 			<button type=button class="btn btn-warning pull-right" ng-click="mask2=false">确定</button>
+ 		</div>
+	</div>
+	<div id="allmap" style="display:none"></div>
+
+	<script src="js/baiduMap.js"></script>
+	<script src="js/angular.js"></script>
+	<script src="js/angular-resource.js"></script>	
+	<script src="js/angular-route.js"></script>
+	<script src="js/controllers.js"></script>
+	<script src="js/filters.js"></script>
+	<script src="js/directives.js"></script>
+	<script src="js/lamp2.js"></script>
+</body>
+</html>

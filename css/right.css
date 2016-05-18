@@ -1,0 +1,20 @@
+*{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+html{
+	width: 100%;
+}
+body{
+	width: 100%;
+}
+.bgc{
+	margin-left: -15px;
+	height: 600px;
+	background-color: #242223;
+}
+
+.bd{
+	border: 1px solid red;
+}

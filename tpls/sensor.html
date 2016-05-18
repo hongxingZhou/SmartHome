@@ -1,0 +1,39 @@
+<!-- sensor -->
+				<div id="sensor" ng-controller="sensorContrl" class="row bgc tab_content">
+					<div class="col-md-6">
+						<div class="infor">
+							<h2>传感器状态：</h2>
+							<hr>
+							<h4>室内光照传感器：  运行正常；</h4>
+							<h4>饮水机水温传感器：运行正常；</h4>
+							<h4>室内温度传感器：  运行正常；</h4>
+							<hr>
+							<h2>详细说明：</h2>
+							<hr>
+							<div id="SensorDetails">
+								<normal>光照传感器运行正常。</normal>
+								<danger>温度传感器故障！！</danger>
+								<danger>室温传感器故障！！</danger>
+							</div>
+							
+							<hr>
+
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="infor">
+
+							<h2>模拟从传感器获取数据：</h2>
+							<hr>
+							<h4>室内光照强度： {{roomLight}}</h4>
+							<input type="number" class="form-control" ng-model="roomLight" >
+							<hr>
+							<h4>饮水机水温： {{waterTemp}}℃</h4>
+							<input type="number" class="form-control" id="waterTemp" ng-model="waterTemp" >
+							<hr>
+							<h4>室内温度：{{roomTemp}}℃</h4>
+							<input type="number" class="form-control" ng-model="roomTemp" >
+							<hr>
+						</div>
+					</div>
+				</div>

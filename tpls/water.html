@@ -1,0 +1,83 @@
+<!-- water 饮水机模块 -->
+				<div id="waterPart" class="row bgc tab_content" ng-controller="waterContrl">
+					<div class="col-md-6">
+						<div class="infor">
+			
+								<h3>饮水机水温： {{waterTemp}}℃</h3>
+								<hr>
+								<ul>
+									<li>加热状态：{{heatingStatus}}</li>
+									<li class="status">
+										<div class="word">
+											控制模式：<span ng-bind="{true:'自动',false:'手动'}[waterContrl]"></span>
+										</div>
+										<div class="checkbox2 pull-right">
+											<input ng-model="waterContrl" type="checkbox" id="ckbox2">
+											<label ng-click="" for="ckbox2"></label>
+										</div>
+									</li>
+									<li class="status">
+										<div class="word">
+											饮水机状态：<span ng-bind="{true:'开启',false:'关闭'}[waterStatus]"></span>
+										</div>
+										<div class="checkbox pull-right">
+											<input ng-model="waterStatus" type="checkbox" id="ckbox">
+											<label ng-click="waterOpenOrClose()" for="ckbox"></label>
+										</div>
+									</li>
+								</ul>
+								<hr>
+								<div class="mode">
+ 									<input type="checkbox" ng-model="workMode"><h3>工作模式</h3>
+ 								</div>
+
+								<div class="workmode" ng-show="workMode">
+									<div class="form-group">
+ 								 		<label for="workingTime"><h4>设置您的上班时间：{{workingTime | date:'shortTime'}}</h4></label>
+ 								  		<input type="time" class="form-control" id="workingTime" ng-model="workingTime">
+ 									</div>
+									<div class="form-group">
+ 										<label for="closingTime"><h4>设置您的下班时间：{{closingTime | date:'shortTime'}}</h4></label>
+ 										<input type="time" class="form-control" id="closingTime" ng-model="closingTime">
+ 									</div>
+ 									<div class="mode">
+ 										<input type="checkbox" ng-model="saturday"><h4>应用于周六</h4>
+ 										<input type="checkbox" ng-model="sunday"><h4>应用于周日</h4>
+ 									</div>	
+								</div>
+
+ 								<hr>
+
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="lightset">
+							<h3>饮水机设置：</h3>
+							<hr>
+							<form action="">
+								<div class="form-group">
+ 								  <label for="keepWater">设置保温温度</label>
+ 								  <input type="number" class="form-control" id="keepWater" ng-model="keepWater">
+ 								</div>
+								<div class="form-group">
+									<div class="btn-group">
+
+ 										<input class="btn btn-primary" ng-click="setDrinkWater()" type="submit" value="饮用水水温">
+ 										<input class="btn btn-primary" ng-click="setTeaWater()" type="submit" value="泡茶水温">
+ 									</div>
+ 								</div>
+							</form>
+							<hr>
+							<h3>您设置的饮水机保温温度为： {{keepWater}}℃</h3>
+							<hr>	
+							<div class="mode">
+ 								<input type="checkbox" ng-model="waterNightMode"><h3>夜间模式</h3>
+ 							</div>
+							<hr>
+ 							<h4>温馨提示：</h4>
+ 							<p class="text-warning">饮用水的最适宜温度是<strong>10℃-30℃</strong>，泡茶时开水的最佳温度是<strong>70℃~80℃</strong>。</p>
+ 							
+						</div>
+
+					</div>
+				</div>

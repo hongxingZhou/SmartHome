@@ -1,0 +1,63 @@
+<!-- lamp 日照灯模块 -->
+				<div id="lampPart" class="row bgc" ng-controller="lampContrl">
+
+					<div class="col-md-6">
+						<div class="infor">
+
+							<h3>室内光照强度： {{roomLight}}</h3>				
+							<!-- <hr> -->
+							<input type="text" class="form-control" ng-model="search" placeholder="搜  索" ><br>
+							<ul ng-repeat="item in lamp | filter:search">
+								<li>日照灯序号：{{item.id}}</li>
+								
+								<li>日照灯光照：{{item.light}}</li>
+								<li class="status">
+									<div class="word">日照灯控制：<span ng-bind="{true: '自动', false: '手动'}[item.contrl]"></span></div>
+									<div class="checkbox2 pull-right">
+										<input ng-model="item.contrl" type="checkbox" id="{{item.id+2}}">
+										<label ng-click="" for="{{item.id+2}}"></label>
+									</div>
+								</li>
+								<li class="status">
+
+									<div class="word">日照灯状态：<span ng-bind="{true: '开启', false: '关闭'}[item.status]"></span></div>
+									<div class="checkbox pull-right">
+										<input ng-model="item.status" type="checkbox" id="{{item.id}}">
+										<label ng-click="openOrClose(item.id)" for="{{item.id}}"></label>
+									</div>
+
+								</li>
+								<li><hr></li>
+							</ul>
+
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="lightset">
+							<h3>日照灯设置：</h3>
+							<hr>
+							<form action="">
+								<div class="form-group">
+ 								  <label for="lowlight">设置最低光照</label>
+ 								  <input type="number" class="form-control" id="lowlight" ng-model="lowLight">
+ 								</div>
+ 								<div class="form-group">
+ 								  <label for="highlight">设置最高光照</label>
+ 								  <input type="number" class="form-control" id="highlight" ng-model="highLight">
+ 								</div>
+ 								<input class="btn btn-primary" ng-click="defaultLamp()" type="submit" value="设为默认值">
+							</form>
+							<hr>
+							<h3>您设置的光照范围： {{lowLight}}-{{highLight}}</h3>
+							<hr>
+							<div class="btn-group">
+								<button class="btn btn-danger" ng-click="closeAllLamp()">全关</button>
+								<button class="btn btn-danger" ng-click="openAllLamp()">全开</button>							
+							</div>
+							<hr>
+							<div class="mode">
+ 								<input type="checkbox" ng-model="lampNightMode"><h3>夜间模式</h3>
+ 							</div>
+						</div>
+					</div>
+				</div>

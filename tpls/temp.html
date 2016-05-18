@@ -1,0 +1,374 @@
+ <!DOCTYPE html>
+<html ng-app="roomModule">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/index.css">
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<script src="js/angular.js"></script>
+</head>
+<body>
+	<div class="cover">
+		<div class="title">
+			<span>智能家居</span>
+		</div>
+		<div class="pro">
+			<span class="text-infor">加载数据......</span>
+			<div class="progress">
+  				<div class="progress-bar progress-bar-success progress-bar-striped process active " role="progressbar" aria-valuemin="0" aria-valuemax="100">
+  				</div>
+			</div>
+		</div>
+		
+	</div>
+
+	<div class="box">
+			<div class="left-part">
+				<ul class="menu">
+					<li ng-class={'active':num==1} ng-click="num=1"><div class="lamp"></div><label>日照灯</label></li>
+					<li ng-class={'active':num==2} ng-click="num=2"><div class="drink"></div><label>饮水机</label></li>
+					<li ng-class={'active':num==3} ng-click="num=3"><div class="air-condition"></div><label>空调</label></li>
+					<li ng-class={'active':num==4} ng-click="num=4"><div class="sensor"></div><label>传感器模块</label></li>
+					<li ng-class={'active':num==5} ng-click="num=5"><div class="jd"></div><label>家电模块</label></li>
+					<li ng-class={'active':num==6} ng-click="num=6"><div class="set"></div><label>系统设置</label></li>
+				</ul>
+			</div>
+			<div class="right-part" ng-init="num=1">
+				<div class="container-fluid">
+
+
+
+
+				<!-- lamp 日照灯模块 -->
+				<div id="lampPart" ng-show="num==1" class="row bgc" ng-controller="lampContrl">
+
+					<div class="col-md-6">
+						<div class="infor">
+
+							<h3>室内光照强度： {{roomLight}}</h3>				
+							<hr>
+							<input type="text" class="form-control" ng-model="search" placeholder="搜  索" ><br>
+							<ul ng-repeat="item in lamp | filter:search">
+								<li>日照灯序号：{{item.id}}</li>
+								
+								<li>日照灯光照：{{item.light}}</li>
+								<li>日照灯控制：{{item.contrl}}</li>
+								<li class="status">
+
+									<div class="word">日照灯状态：<span ng-bind="{true: '开启', false: '关闭'}[item.status]"></span></div>
+									<div class="checkbox pull-right">
+										<input ng-model="item.status" type="checkbox" id="{{item.id}}">
+										<label ng-click="openOrClose(item.id)" for="{{item.id}}"></label>
+									</div>
+
+								</li>
+								<li><hr></li>
+							</ul>
+
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="lightset">
+							<form action="">
+								<div class="form-group">
+ 								  <label for="lowlight">设置最低光照</label>
+ 								  <input type="number" class="form-control" id="lowlight" ng-model="lowLight">
+ 								</div>
+ 								<div class="form-group">
+ 								  <label for="highlight">设置最高光照</label>
+ 								  <input type="number" class="form-control" id="highlight" ng-model="highLight">
+ 								</div>
+ 								<input class="btn btn-primary" ng-click="checkLamp()" type="submit" value="模拟自动检测">
+							</form>
+							<hr>
+							<h3>您设置的光照范围： {{lowLight}}-{{highLight}}</h3>
+							<hr>
+							<div class="mode">
+ 								<input type="checkbox" ng-model="lampNightMode"><h3>夜间模式</h3>
+ 							</div>
+						</div>
+					</div>
+				</div>
+
+
+
+
+				<!-- water 饮水机模块 -->
+				<div id="waterPart" ng-show="num==2" class="row bgc tab_content" ng-controller="waterContrl">
+					<div class="col-md-6">
+						<div class="infor">
+			
+								<h3>饮水机水温： {{waterTemp}}℃</h3>
+								<hr>
+								<ul>
+									<li>加热状态：{{heatingStatus}}</li>
+									<li>控制模式：{{waterContrl}}</li>
+									<li class="status">
+										<div class="word">
+											饮水机状态：<span ng-bind="{true:'开启',false:'关闭'}[waterStatus]"></span>
+										</div>
+										<div class="checkbox pull-right">
+											<input ng-model="waterStatus" type="checkbox" id="ckbox">
+											<label ng-click="waterOpenOrClose()" for="ckbox"></label>
+										</div>
+									</li>
+								</ul>
+								<hr>
+								<div class="mode">
+ 									<input type="checkbox" ng-model="workMode"><h3>工作模式</h3>
+ 								</div>
+
+								<div class="workmode" ng-show="workMode">
+									<div class="form-group">
+ 								 		<label for="workingTime"><h4>设置您的上班时间：{{workingTime | date:'shortTime'}}</h4></label>
+ 								  		<input type="time" class="form-control" id="workingTime" ng-model="workingTime">
+ 									</div>
+									<div class="form-group">
+ 										<label for="closingTime"><h4>设置您的下班时间：{{closingTime | date:'shortTime'}}</h4></label>
+ 										<input type="time" class="form-control" id="closingTime" ng-model="closingTime">
+ 									</div>
+ 									<div class="mode">
+ 										<input type="checkbox" ng-model="saturday"><h4>应用于周六</h4>
+ 										<input type="checkbox" ng-model="sunday"><h4>应用于周日</h4>
+ 									</div>	
+								</div>
+
+ 								<hr>
+ 								<div class="mode">
+ 									<input type="checkbox" ng-model="waterNightMode"><h3>夜间模式</h3>
+ 								</div>
+ 								<hr>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="lightset">
+							<form action="">
+								<div class="form-group">
+ 								  <label for="keepWater">设置保温温度</label>
+ 								  <input type="number" class="form-control" id="keepWater" ng-model="keepWater">
+ 								</div>
+ 								<input class="btn btn-primary" ng-click="checkWater()" type="submit" value="模拟自动检测">
+							</form>
+							<hr>
+							<h3>您设置的饮水机保温温度为： {{keepWater}}℃</h3>
+							<hr>
+							
+
+
+						</div>
+
+					</div>
+				</div>
+
+
+
+
+
+
+
+
+				<!-- air condition 空调模块 -->
+				<div id="airconditionPart" ng-show="num==3" class="row bgc tab_content" ng-controller="airConditionContrl">
+					<div class="col-md-6">
+						<div class="infor">
+							<h4>室外温度: {{nowTemp}}℃</h4>
+							<h4>今日天气: {{todayLowTemp}}-{{todayHighTemp}}℃，{{nowCond}}</h4>
+							<hr>
+								<h3>室内温度：{{roomTemp}}℃</h3>
+								<h3>保持室温：{{keepTemp}}℃</h3>
+								<hr>
+								<ul>
+									<li>空调模式：<span ng-bind="{1:'加热',2:'制冷',3:'--'}[mode]"></span></li>
+									<li>控制模式：{{airConditionContrl}}</li>
+									<li class="status">
+										<div class="word">空调状态：<span ng-bind="{true:'开启',false:'关闭'}[airConditionStatus]"></span></div>
+										<div class="checkbox pull-right">
+											<input ng-model="airConditionStatus" type="checkbox" id="ckbox2">
+											<label ng-click="airConditionOpenOrClose()" for="ckbox2"></label>
+										</div>
+									</li>
+								</ul>
+
+								<hr>
+								<div class="mode">
+ 								<input type="checkbox" ng-model="airNightMode"><h3>夜间模式</h3>
+ 								</div>
+								<hr>
+
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="lightset">
+							<form action="">
+								<div class="form-group">
+ 								  <label for="lowTemp">设置最低室温</label>
+ 								  <input type="number" class="form-control" id="lowTemp" ng-model="lowTemp">
+ 								</div>
+ 								<div class="form-group">
+ 								  <label for="highTemp">设置最高室温</label>
+ 								  <input type="number" class="form-control" id="highTemp" ng-model="highTemp">
+ 								</div>
+ 								<div class="form-group">
+ 								  <label for="keepTemp">设置保持室温</label>
+ 								  <input type="number" class="form-control" id="keepTemp" ng-model="keepTemp">
+
+ 								</div>
+ 								<input class="btn btn-primary" ng-click="checkAirCondition()" type="submit" value="模拟自动检测">
+							</form>
+							<hr>
+							<h3>您设置的室内温度范围： {{lowTemp}}-{{highTemp}}℃</h3>
+						</div>
+					</div>
+				</div>
+				<!-- sensor -->
+				<div id="sensor" ng-show="num==4" class="row bgc tab_content">
+					<div class="col-md-6">
+						<div class="infor">
+							<h2>传感器状态：</h2>
+							<hr>
+							<h4>室内光照传感器：  运行正常；</h4>
+							<h4>饮水机水温传感器：运行正常；</h4>
+							<h4>室内温度传感器：  运行正常；</h4>
+							<hr>
+							<h2>详细说明：</h2>
+							<hr>
+							<normal>光照传感器运行正常。</normal>
+							<danger>温度传感器故障！！</danger>
+							<danger>室温传感器故障！！</danger>
+							<hr>
+
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="infor">
+
+							<h2>模拟从传感器获取数据：</h2>
+							<hr>
+							<h4>室内光照强度： {{roomLight}}</h4>
+							<input type="number" class="form-control" ng-model="roomLight" >
+							<hr>
+							<h4>饮水机水温： {{waterTemp}}℃</h4>
+							<input type="number" class="form-control" id="waterTemp" ng-model="waterTemp" >
+							<hr>
+							<h4>室内温度：{{roomTemp}}℃</h4>
+							<input type="number" class="form-control" ng-model="roomTemp" >
+							<hr>
+						</div>
+					</div>
+				</div>
+				<!-- app -->
+				<div id="appliance" ng-show="num==5" class="row bgc tab_content">
+					<div class="col-md-6">
+						<div class="infor">
+							<h2>家电状态：</h2>
+							<hr>
+							<h3>日照灯：  连接正常；</h3>
+							<h3>饮水机：  连接正常；</h3>
+							<h3>空  调：  连接正常；</h3>
+							<hr>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="infor">
+							<h2>详细说明：</h2>
+							<hr>
+							<normal>日照灯连接正常</normal>
+							<warning>饮水机长时间未用，建议关闭</warning>
+							<danger>空调连接异常</danger>
+
+						</div>
+					</div>
+				</div>
+				<!-- setting -->
+				<div id="setting" ng-show="num==6" class="row bgc tab_content"  ng-controller="settingContrl">
+					<div class="col-md-6">
+						<div class="infor">
+							<h2>当前城市：<span ng-bind="localCity"></span><br><small><a href="" ng-click="cityToggle()">切换城市</a></small></h2>
+							
+							<div class="city-list" ng-show="cityShow">
+								<div class="row">
+									<div class="form-group col-md-6">
+											<select class="form-control col-md-6" ng-model="province" ng-options="city.id as city.name for city in cityList | cityFilter:0" name="province" id="">
+											</select>										
+									</div>
+									<div class="form-group col-md-6">
+											<select class="form-control col-md-6" ng-model="city" ng-options="city.id as city.name for city in cityList | cityFilter:province" name="city" id="">
+											</select>										
+									</div>
+									<div class="form-group col-md-12">
+										<input type="button" ng-click="submitCity();" class="btn btn-warning" value="确定">
+									</div>
+
+								</div>
+							</div>
+							
+							<hr>
+
+							<h2>夜间模式时间区间：</h2>
+							<div class="row">
+								<div class="form-group col-md-6">
+									<label for="nightStart">from:<small>{{nightStart | date:'shortTime'}}</small></label>
+									<input type="time" class="form-control" id="nightStart" ng-model="nightStart">
+								</div>
+								<div class="form-group col-md-6">
+									<label for="nightEnd">to:<small>{{nightEnd | date:'shortTime'}}</small></label>
+									<input type="time" class="form-control" id="nightEnd" ng-model="nightEnd">
+								</div>
+								<div class="form-group col-md-12">
+									<input type="button" value="确认" class="btn btn-primary" ng-click="submitNightRange()">
+								</div>
+							</div>
+							<hr>
+							<div class="form-group">
+								<button class="btn btn-warning" ng-click="invokeTooltip('this is a test,too!')">提示框1</button>
+							</div>
+							<div class="form-group">
+								<button class="btn btn-danger" ng-click="invokeTooltip2('this is a test,too!')">提示框2</button>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="infor">
+
+							
+						</div>
+					</div>
+				</div>
+				</div>
+			</div>
+
+
+	</div>
+
+	<!-- mask -->
+	<div class="mask" ng-show="mask">
+		<button type="button" class="close" ng-click="mask=false"><span aria-hidden="true">&times;</span></button>
+		<p id="content" class="content text-primary">this is a test!!!</p>
+		<div class="review">
+ 			<input type="checkbox" ng-model="review"><span class="text-primary"> 不再显示</span>
+ 			<button type=button class="btn btn-success pull-right" ng-click="mask=false">确定</button>
+ 		</div>
+	</div>
+	<!-- mask 2-->
+	<div class="mask2" ng-show="mask2">
+		<button type="button" class="close" ng-click="mask2=false"><span aria-hidden="true">&times;</span></button>
+		<p id="content2" class="content text-primary">this is a test!!!</p>
+		<div class="review">
+ 			<button type=button class="btn btn-warning pull-right" ng-click="mask2=false">确定</button>
+ 		</div>
+	</div>
+	<div id="allmap"></div>
+	
+	<script src="js/baiduMap.js"></script>
+	<script src="js/angular.js"></script>
+	<script src="js/angular-resource.js"></script>	
+	<script src="js/angular-route.js"></script>
+	<script src="js/controllers.js"></script>
+	<script src="js/filters.js"></script>
+	<script src="js/directives.js"></script>
+    <!-- // <script src="js/factories.js"></script> -->
+	<script src="js/lamp.js"></script>
+</body>
+</html>

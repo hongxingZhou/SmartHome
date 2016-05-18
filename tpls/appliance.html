@@ -1,0 +1,72 @@
+<!-- app -->
+				<div id="appliance" class="row bgc tab_content" ng-controller="applianceContrl">
+					<div class="col-md-6">
+						<div class="infor">
+							<h2>家电状态：</h2>
+							<hr>
+							<h4>日照灯： </h4>
+								<normal ng-show="lampConn">日照灯连接正常</normal>
+								<danger ng-hide="lampConn">日照灯连接异常</danger>
+							<h4>饮水机：</h4>
+								<normal ng-show="waterConn">饮水机连接正常</normal>
+								<danger ng-hide="waterConn">饮水机连接异常</danger>
+							<h4>空  调：</h4>
+								<normal ng-show="airConditionConn">空调连接正常</normal>
+								<danger ng-hide="airConditionConn">空调连接异常</danger>
+
+							<hr>
+							<h2>故障模拟：</h2>
+							<hr>
+							<div class="mode">
+ 								<input type="checkbox" ng-model="lampConn"><h4>日照灯连接正常</h4>
+ 								<div ng-show="lampConn" class="pull-right">
+ 									<input type="checkbox" ng-model="lampOvertime"> <h4>警告</h4>
+ 								</div>
+ 								<div ng-hide="lampConn" class="pull-right">
+ 									<input type="radio" value="1" ng-model="lampError"> <h4>故障一</h4>
+ 									<input type="radio" value="2" ng-model="lampError"> <h4>故障二</h4>
+ 								</div>
+ 							</div>
+ 							<div class="mode">
+ 								<input type="checkbox" ng-model="waterConn"><h4>饮水机连接正常</h4>
+ 								<div ng-show="waterConn" class="pull-right">
+ 									<input type="checkbox" ng-model="waterOvertime"> <h4>警告</h4>
+ 								</div>
+ 								<div ng-hide="waterConn" class="pull-right">
+ 									<input type="radio" value="1" ng-model="waterError"> <h4>故障一</h4>
+ 									<input type="radio" value="2" ng-model="waterError"> <h4>故障二</h4>
+ 								</div>
+ 							</div>
+ 							<div class="mode">
+ 								<input type="checkbox" ng-model="airConditionConn"><h4>空  调连接正常</h4>
+ 								<div ng-show="airConditionConn" class="pull-right">
+ 									<input type="checkbox" ng-model="airConditionOvertime"> <h4>警告</h4>
+ 								</div>
+ 								<div ng-hide="airConditionConn" class="pull-right">
+ 									<input type="radio" value="1" ng-model="airError"> <h4>故障一</h4>
+ 									<input type="radio" value="2" ng-model="airError"> <h4>故障二</h4>
+ 								</div>								
+ 							</div>
+
+
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="infor">
+							<h2>详细说明：</h2>
+							<hr>
+							<div id="AppDetails">
+								<warning ng-show="lampOvertime">日照灯长时间开启，建议关闭</warning>
+								<warning ng-show="waterOvertime">饮水机长时间未用，建议关闭</warning>
+								<warning ng-show="airConditionOvertime">空调长时间开启，建议关闭</warning>
+
+
+								<danger ng-hide="lampConn"><span ng-bind="{1:'日照灯:网络连接故障！',2:'日照灯故障'}[lampError]"></span></danger>
+								<danger ng-hide="waterConn"><span ng-bind="{1:'饮水机:网络连接故障！',2:'饮水机故障'}[waterError]"></danger>			
+								<danger ng-hide="airConditionConn"><span ng-bind="{1:'空调:网络连接故障！',2:'空调故障'}[airError]"></danger>
+								
+							</div>
+
+						</div>
+					</div>
+				</div>

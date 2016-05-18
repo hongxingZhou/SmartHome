@@ -1,0 +1,21 @@
+
+"lamp":[{
+			"id":"001",
+			"status":"开启",
+			"light":260,
+			"contrl":"自动",
+		},
+		{
+			"id":"002",
+			"status":"开启",
+			"light":300,
+			"contrl":"手动",	
+		},
+		{
+			"id":"001",
+			"status":"关闭",
+			"light":0,
+			"contrl":"手动",
+		}
+	]
+
